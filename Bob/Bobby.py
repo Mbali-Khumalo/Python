@@ -1,4 +1,4 @@
-commands = ["UP,DOWN,RIGHT,LEFT,OFF,RUN"]
+commands = ["UP,DOWN,RIGHT,LEFT,OFF"]
 
 def bobbie_chip():
     bobbie_Bob = input ("What would you like to name your bot? ")
@@ -34,13 +34,7 @@ def command_input(position):
             position = turn_right(bobbie_Bob,position,co_rd)
 
         elif "LEFT" in command:
-            position = turn_left(bobbie_Bob,position,co_rd)
-        elif "RUN" in command:
-            steps = int(command[1])
-            co_rd = run_command(steps, co_rd,bobbie_Bob,position)
-            print(f" > {bobbie_Bob} now at position ({co_rd[0]},{co_rd[1]}).")
-        else:
-            print(f"{bobbie_Bob}: Sorry, I did not understand '{user_input.capitalize()}'.")  
+            position = turn_left(bobbie_Bob,position,co_rd)  
 
 def commands():
     print("""I can understand these commands:
@@ -49,16 +43,14 @@ OFF  - Shut down robot
 UP - moves forward by certain number of steps
 BACK - moves back certain number of times
 RIGHT - turns right
-LEFT - turns left
-RUN - robot sprints with certain number of steps""")
+LEFT - turns left""")
 
     return 'I can understand these commands:\
         OFF - Shut down robot\
         UP - moves forward by certain number of steps\
         BACK - moves back certain number of times\
         RIGHT - turns right\
-        LEFT - turns left\
-        SPRINT - robot sprints with certain number of steps'
+        LEFT - turns left'
 
 def track_position(position):
     if position == -4 or position == 4:
@@ -125,13 +117,6 @@ def turn_left(bobbie_Bob,position,co_rd):
     print(f" > {bobbie_Bob} turned left.")
     print(f" > {bobbie_Bob} now at position ({co_rd[0]},{co_rd[1]}).")
     return position
-
-def run_command(steps, co_rd,bobbie_Bob,position):
-    if steps == 0:
-        return co_rd
-
-    co_rd = move_up_command(bobbie_Bob,position,co_rd,steps)
-    return run_command(steps-1,co_rd,bobbie_Bob,position)
 
 
 def robot_start():
